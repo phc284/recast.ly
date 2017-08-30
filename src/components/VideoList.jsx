@@ -1,10 +1,9 @@
-var VideoList = () => (
+var VideoList = ({ videos }) => (
+  console.log(videos),
   <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
+    {videos.map(vid =>
+        <VideoListEntry key={vid.id.videoId} video={vid}/>
+    )}
   </div>
 );
 
