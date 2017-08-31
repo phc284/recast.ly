@@ -1,10 +1,10 @@
 var VideoList = ({ videos }) => (
-  console.log(videos),
-  <div className="video-list">
-    {videos.map(vid =>
-        <VideoListEntry key={vid.id.videoId} video={vid}/>
-    )}
-  </div>
+
+    <div className="video-list">
+      {videos.map(vid =>
+          <VideoListEntry key={vid.id.videoId} video={vid}/>
+      )}
+    </div>
 );
 
 // PropTypes tell other developers what `props` a component expects
