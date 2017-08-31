@@ -1,35 +1,49 @@
 class App extends React.Component {
-  constructor ({videos}) {
-    super(videos);
-    console.log(videos);
+  constructor (props) {
+    super(props);
+
     this.state = {
-      videos: videos,
-      currentVideo: videos[0]
+      videos: null,
+      currentVideo: null
     };
+
+    this.getYoutubeVids = this.getYoutubeVids.bind(this);
     this.selectVideo = this.selectVideo.bind(this);
   }
 
-  selectVideo(video) {
+  componentDidMount() {
+    this.getYoutubeVids('best anime opening theme songs');
+  }
+
+  selectVideo (video) {
     this.setState({
       currentVideo: video
     });
   }
 
-  // getSearchInput () {
-  //   //something in Search.jsx
-  //   searchVideo('');
-  // }
-  //
-  // searchVideo(query) {
-  //   searchYoutube({max: 5, query: query, key: window.YOUTUBE_API_KEY})
-  // }
+  getYoutubeVids(query) {
+    console.log(this.props.YOUTUBE_API_KEY);
+    var options = {
+      key: this.props.YOUTUBE_API_KEY,
+      query: query
+    };
+
+    this.props.searchYouTube(options, (videos) =>
+      this.setState({
+        videos: videos,
+        currentVideo: videos[0]
+      })
+    );
+  }
 
   render () {
     return (
+
+      this.state.videos ?
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search videos={this.state.videos}/>
+            <Search searchInput={this.getYoutubeVids}/>
           </div>
         </nav>
         <div className="row">
@@ -41,11 +55,13 @@ class App extends React.Component {
           </div>
         </div>
       </div>
+      :
+      <div>Loading</div>
     );
   }
+
 }
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
-ReactDOM.render(<App videos={window.exampleVideoDatas}/>, document.getElementById('app'));
