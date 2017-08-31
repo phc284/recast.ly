@@ -1,5 +1,4 @@
-var VideoPlayer = ({ video }) => {
-  return (
+var VideoPlayer = ({ video }) => (
     <div className="video-player">
       <div className="embed-responsive embed-responsive-16by9">
         <iframe className="embed-responsive-item" src={'https://www.youtube.com/embed/' + video.id.videoId} allowFullScreen></iframe>
@@ -9,8 +8,8 @@ var VideoPlayer = ({ video }) => {
         <div>{video.snippet.description}</div>
       </div>
     </div>
-  );
-};
+);
+
 
 
 // PropTypes tell other developers what `props` a component expects

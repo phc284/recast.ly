@@ -1,23 +1,14 @@
-var VideoListEntry = ({ video }) => {
-  // console.log(vid),
-
-
-  var clickHandler = () => {
-  };
-
-
-  return (
+var VideoListEntry = ({ video, selectVideo }) => (
     <div className="video-list-entry media">
       <div className="media-left media-middle">
-        <img className="media-object" onClick={clickHandler} src={video.snippet.thumbnails.default.url} alt="" />
+        <img className="media-object" onClick={() => selectVideo(video)} src={video.snippet.thumbnails.default.url} alt="" />
       </div>
       <div className="media-body">
-        <div className="video-list-entry-title" onClick={clickHandler}>{video.snippet.title}</div>
+        <div className="video-list-entry-title" onClick={() => selectVideo(video)}>{video.snippet.title}</div>
         <div className="video-list-entry-detail">{video.snippet.description}</div>
       </div>
     </div>
-  );
-};
+);
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated

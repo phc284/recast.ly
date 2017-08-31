@@ -1,8 +1,7 @@
-var VideoList = ({ videos }) => (
-
+var VideoList = ({ videos, selectVideo }) => (
     <div className="video-list">
       {videos.map(vid =>
-          <VideoListEntry key={vid.id.videoId} video={vid}/>
+          <VideoListEntry key={vid.id.videoId} video={vid} selectVideo={selectVideo}/>
       )}
     </div>
 );

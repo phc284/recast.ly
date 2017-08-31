@@ -1,27 +1,43 @@
 class App extends React.Component {
-  constructor ({props}) {
-    super(props);
-
+  constructor ({videos}) {
+    super(videos);
+    console.log(videos);
     this.state = {
-      videos: [],
-      current: this.state.videos[0]
+      videos: videos,
+      currentVideo: videos[0]
     };
+    this.selectVideo = this.selectVideo.bind(this);
   }
+
+  selectVideo(video) {
+    this.setState({
+      currentVideo: video
+    });
+  }
+
+  // getSearchInput () {
+  //   //something in Search.jsx
+  //   searchVideo('');
+  // }
+  //
+  // searchVideo(query) {
+  //   searchYoutube({max: 5, query: query, key: window.YOUTUBE_API_KEY})
+  // }
 
   render () {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search videos={window.exampleVideoData}/>
+            <Search videos={this.state.videos}/>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={window.exampleVideoData[0]}/>
+            <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={window.exampleVideoData} props={this.state}/>
+            <VideoList videos={this.state.videos} selectVideo={this.selectVideo}/>
           </div>
         </div>
       </div>
@@ -32,4 +48,4 @@ class App extends React.Component {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
-ReactDOM.render(<App props={window.exampleVideoData}/>, document.getElementById('app'));
+ReactDOM.render(<App videos={window.exampleVideoDatas}/>, document.getElementById('app'));
